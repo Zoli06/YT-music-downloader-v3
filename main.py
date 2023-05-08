@@ -4,6 +4,10 @@ import shutil
 
 # I only tested this on Linux
 # But I guess it will work on Windows too
+# UPDATE: Fails with 429
+# Haven't investigated yet
+# Maybe my pc is too fast
+# Sufferring from success
 
 # IMPORTANT: Don't forget to install ffmpeg command line tool
 if not shutil.which('ffmpeg'):
@@ -25,4 +29,4 @@ lib = Library.get_user_library(user) + Library.get_user_home(user)
 # Set save_to_subfolders to False to remove duplicate songs
 # Downside: You won't see which song is from which playlist
 # But most times it's in the mp3 metadata
-lib.download('downloads', save_to_subfolders=False, processess=12, format='mp3')
+lib.download('downloads', save_to_subfolders=False, processess=6, format='mp3')
