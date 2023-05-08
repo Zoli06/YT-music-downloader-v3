@@ -16,7 +16,6 @@ class Playlist:
 
     @staticmethod
     def get_playlist(user, id: str, limit: int = None):
-        print(id)
         try:
             data = user.api.get_playlist(id, limit=limit)
         except Exception as e:
