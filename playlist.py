@@ -105,7 +105,7 @@ class Playlist:
     def get_playlist_from_likes(user, limit: int = None):
         return Playlist.get_playlist(user, user.api.get_liked_songs(limit=limit))
     
-    def download(self, save_location: str, save_to_subfolder: bool = True, prcossess: int = 12, format: str = "mp3"):
+    def download(self, save_location: str, save_to_subfolder: bool = True, processes: int = 12, format: str = "mp3"):
         print(f"Downloading {self.title} with {len(self.songs)} songs")
         
         if not os.path.exists(save_location):
@@ -119,7 +119,7 @@ class Playlist:
             if not os.path.exists(save_location):
                 os.mkdir(save_location)
 
-        pool = Pool(processes=prcossess)
+        pool = Pool(processes=processes)
         
         for song in self.songs:
             pool.apply_async(song.download, (save_location,format,))
