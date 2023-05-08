@@ -30,5 +30,5 @@ uritemplate==4.1.1
 urllib3==1.26.15
 websockets==11.0.2
 youtube-dl==2021.12.17
-yt-dlp @ https://github.com/yt-dlp/yt-dlp/archive/master.tar.gz#sha256=135d5c5c5c63757f158138fdb194ee02b28d461da4ea861dfcdd88d62d30e5f3
+yt-dlp @ https://github.com/yt-dlp/yt-dlp/archive/master.tar.gz
 ytmusicapi==1.0.2
