@@ -18,6 +18,8 @@ user = User()
 # get_user_home already includes liked songs for me
 # But if it doesn't for you, you can use get_playlist_from_likes
 # See playlist.py
+# These commands are customizible
+# See library.py
 lib = Library.get_user_library(user) + Library.get_user_home(user)
 
 # Set save_to_subfolders to False to remove duplicate songs
