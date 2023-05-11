@@ -4,13 +4,6 @@ import shutil
 
 
 def main():
-    # I only tested this on Linux
-    # But I guess it will work on Windows too
-    # UPDATE: Fails with 429
-    # Haven't investigated yet
-    # Maybe my pc is too fast
-    # Sufferring from success
-
     # IMPORTANT: Don't forget to install ffmpeg command line tool
     if not shutil.which("ffmpeg"):
         print("ffmpeg not found")
