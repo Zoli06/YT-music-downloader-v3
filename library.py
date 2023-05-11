@@ -15,7 +15,7 @@ class Library:
         playlists = self.playlists + other.playlists
         playlists = list({playlist.id: playlist for playlist in playlists}.values())
         return Library(playlists)
-    
+
     def add_playlist(self, playlist: Playlist):
         self.playlists.append(playlist)
 
@@ -24,7 +24,10 @@ class Library:
         data = user.api.get_library_playlists()
         playlists = []
         for playlist in data:
-            playlists.append(Playlist.get_playlist(user, playlist["playlistId"], playlist_limit))
+            playlist = Playlist.get_playlist(user, playlist["playlistId"], playlist_limit)
+
+            if playlist is not None:
+                playlists.append(playlist)
 
         return Library(playlists)
 
@@ -47,36 +50,48 @@ class Library:
                         playlist = Playlist.get_playlist(
                             user, item["playlistId"], playlist_limit
                         )
+
                         if playlist is not None:
                             playlists.append(playlist)
                 elif "playlistId" in item and "videoId" in item:
                     if include_watch_playlists:
-                        playlists.append(
-                            Playlist.get_watch_playlist(
-                                user, item["videoId"], item["playlistId"], playlist_limit
-                            )
+                        playlist = Playlist.get_watch_playlist(
+                            user, item["videoId"], item["playlistId"], playlist_limit
                         )
+
+                        if playlist is not None:
+                            playlists.append(playlist)
                 elif "browseId" in item:
                     # If starting with MPREb it is an album
                     # get audioplaylistId from api
                     if item["browseId"].startswith("MPREb"):
                         if include_albums:
-                            playlists.append(
-                                Playlist.get_playlist_from_album(user, item["browseId"], playlist_limit)
+                            playlist = Playlist.get_playlist_from_album(
+                                user, item["browseId"], playlist_limit
                             )
+
+                            if playlist is not None:
+                                playlists.append(playlist)
                     # Check if it is an artist
                     elif item["browseId"].startswith("UC"):
                         if include_artists:
-                            playlists.append(
-                                Playlist.get_playlist_from_artist(
-                                    user, item["browseId"], playlist_limit
-                                )
+                            playlist = Playlist.get_playlist_from_artist(
+                                user, item["browseId"], playlist_limit
                             )
+
+                            if playlist is not None:
+                                playlists.append(playlist)
                 else:
                     pass
 
         return Library(playlists)
 
-    def download(self, save_location: str, save_to_subfolders: bool = True, processess: int = 12, format: str = "mp3"):
+    def download(
+        self,
+        save_location: str,
+        save_to_subfolders: bool = True,
+        processess: int = 12,
+        format: str = "mp3",
+    ):
         for playlist in self.playlists:
             playlist.download(save_location, save_to_subfolders, processess, format)
