@@ -19,7 +19,7 @@ class Playlist:
         try:
             data = user.api.get_playlist(id, limit=limit)
         except Exception as e:
-            print(f"Error getting playlist {id}. Custom created radio playlists are not supported.")
+            print(f"Error getting playlist {id}. Some playlist types are not supported yet.")
             return None
             
         title = data["title"]
