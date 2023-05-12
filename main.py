@@ -31,7 +31,7 @@ def main():
     # Downside: You won't see which song is from which playlist
     # But most times it's in the mp3 metadata
     lib.download(
-        download_location="downloads",
+        save_location="downloads",
         save_to_subfolders=False,
         processess=6,
         format="mp3",
