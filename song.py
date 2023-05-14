@@ -47,6 +47,8 @@ class Song:
             ydl_opts = {
                 "quiet": True,
                 "format": "bestaudio/best",
+                "writethumbnail": True,
+                "embedthumbnail": True,
                 "outtmpl": f"{save_location}/{self.artist.replace('/', '_')} - {self.title.replace('/', '_')}.%(ext)s",
                 "postprocessors": [
                     {
